@@ -46,9 +46,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   logo: {
-    width: '100%', 
     height: 100, 
-    // maxWidth: 200, 
   },
 });
 

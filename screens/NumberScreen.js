@@ -19,6 +19,11 @@ const NumberInput = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const inputRef = useRef(null);
 
+  const handlePhoneChange = (text) => {
+    const cleaned = text.replace(/[^0-9]/g, '');
+    setPhoneNumber(cleaned);
+  };
+
   useEffect(() => {
     // Auto focus bàn phím
     const timer = setTimeout(() => {
@@ -58,7 +63,7 @@ const NumberInput = ({ navigation }) => {
                   ref={inputRef}
                   style={styles.input}
                   value={phoneNumber}
-                  onChangeText={setPhoneNumber}
+                  onChangeText={handlePhoneChange}
                   keyboardType="phone-pad"
                   placeholder="012345678"
                   maxLength={10}
