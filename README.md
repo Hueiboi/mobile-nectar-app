@@ -45,4 +45,6 @@
 # Video Demo
 - Các thao tác cơ bản
 ![video](./assets/video1.mp4)
+https://github.com/user-attachments/assets/bfbb867c-6a0e-4e8a-ae75-49a41fab7beb
+
 
