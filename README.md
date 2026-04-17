@@ -1,4 +1,4 @@
-# **TH 11/4 Nectar App**
+# **TH 11/4 & 17/4 Nectar App**
 - Họ và tên: Bùi Đình Hiếu
 - MSV: 23810310246
 - Lớp: D18CNPM4
@@ -28,14 +28,18 @@
 ---
 
 # Screenshots
-![anh1](./assets/23810310246_01_splash.jpg)
-![anh2](./assets/23810310246_02_onboard.jpg)
-![anh3](./assets/23810310246_03_signin.jpg)
-![anh4](./assets/23810310246_04_number.jpg)
-![anh5](./assets/23810310246_05_verification.jpg)
-![anh6](./assets/23810310246_06_locationselect.jpg)
-![anh7](./assets/23810310246_07_login.jpg)
-![anh8](./assets/23810310246_08_singup.jpg)
+| Splash Screen | Onboarding | Sign In | Number Input |
+| :---: | :---: | :---: | :---: |
+| <img src="./assets/23810310246_01_splash.jpg" width="200" /> | <img src="./assets/23810310246_02_onboard.jpg" width="200" /> | <img src="./assets/23810310246_03_signin.jpg" width="200" /> | <img src="./assets/23810310246_04_number.jpg" width="200" /> |
+
+| Verification | Select Location | Login | Sign Up |
+| :---: | :---: | :---: | :---: |
+| <img src="./assets/23810310246_05_verification.jpg" width="200" /> | <img src="./assets/23810310246_06_locationselect.jpg" width="200" /> | <img src="./assets/23810310246_07_login.jpg" width="200" /> | <img src="./assets/23810310246_08_signup.jpg" width="200" /> |
+
+---
+| Home | Product Detail | Explore | Beverages |
+| :---: | :---: | :---: | :---: |
+| <img src="./assets/23810310246_09_home.jpg" width="200" /> | <img src="./assets/23810310246_10_productdetail.jpg" width="200" /> | <img src="./assets/23810310246_11_explore.jpg" width="200" /> | <img src="./assets/23810310246_12_beverages.jpg" width="200" /> |
 
 ---
 # Video Demo
