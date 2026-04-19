@@ -3,9 +3,10 @@ import {
   View, Text, StyleSheet, ScrollView, Image, 
   TextInput, TouchableOpacity,
 } from 'react-native';
-import { Ionicons, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { EXCLUSIVE_OFFERS, BEST_SELLING, GROCERIES } from '../constants/data';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ProductCard from '../components/ProductCard';
 
 const HomeScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets()
@@ -18,23 +19,6 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.seeAllText}>See all</Text>
       </TouchableOpacity>
     </View>
-  );
-
-  const ProductCard = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.card}
-      onPress={() => navigation.navigate('ProductDetail', { item })}
-    >
-      <Image source={item.image} style={styles.cardImage} resizeMode="contain" />
-      <Text style={styles.itemName}>{item.name}</Text>
-      <Text style={styles.itemUnit}>{item.unit}, Price</Text>
-      <View style={styles.cardFooter}>
-        <Text style={styles.itemPrice}>${item.price}</Text>
-        <TouchableOpacity style={styles.addBtn}>
-          <MaterialIcons name="add" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
   );
 
   return (
@@ -134,34 +118,7 @@ const styles = StyleSheet.create({
   seeAllText: { fontSize: 16, color: '#53B175', fontWeight: '600' },
 
   horizontalList: { paddingLeft: 20 },
-  card: {
-    width: 173,
-    height: 248,
-    borderWidth: 1,
-    borderColor: '#E2E2E2',
-    borderRadius: 18,
-    padding: 15,
-    marginRight: 15,
-  },
-  cardImage: { width: '100%', height: 100, marginBottom: 15 },
-  itemName: { fontSize: 16, fontWeight: '700', color: '#181725' },
-  itemUnit: { fontSize: 14, color: '#7C7C7C', marginTop: 5 },
-  cardFooter: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    marginTop: 'auto' 
-  },
-  itemPrice: { fontSize: 18, fontWeight: '600', color: '#181725' },
-  addBtn: { 
-    backgroundColor: '#53B175', 
-    width: 45, 
-    height: 45, 
-    borderRadius: 15, 
-    justifyContent: 'center', 
-    alignItems: 'center' 
-  },
-
+  
   groceryCategory: {
     flexDirection: 'row',
     alignItems: 'center',

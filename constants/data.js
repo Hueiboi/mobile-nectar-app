@@ -66,3 +66,19 @@ export const BEVERAGES = [
   { id: '5', name: 'Coca Cola Can', unit: '325ml', price: 4.99, image: require('../assets/coca.jpg'), color: '#F2F3F2' },
   { id: '6', name: 'Pepsi Can', unit: '330ml', price: 4.99, image: require('../assets/pepsi.jpg'), color: '#F2F3F2' },
 ];
+
+export const SEARCH_PRODUCTS = [
+  { id: '1', name: 'Egg Chicken Red', category: 'Eggs', brand: 'Cocola', price: 1.99, unit: '4pcs', image: require('../assets/egg_red.png') },
+  { id: '2', name: 'Egg Chicken White', category: 'Eggs', brand: 'Kazi Farmas', price: 1.50, unit: '180g', image: require('../assets/egg_white.png') },
+  { id: '3', name: 'Egg Pasta', category: 'Noodles & Pasta', brand: 'Individual Collection', price: 15.99, unit: '30gm', image: require('../assets/egg_pasta.png') },
+  { id: '4', name: 'Egg Noodles', category: 'Noodles & Pasta', brand: 'Ifad', price: 15.99, unit: '2L', image: require('../assets/egg_noodles.png') },
+  { id: '5', name: 'Mayonnaise Eggless', category: 'Noodles & Pasta', brand: 'Kazi Farmas', price: 10.99, unit: '2L', image: require('../assets/mayo_eggless.png') },
+  { id: '6', name: 'Egg Noodles 2', category: 'Noodles & Pasta', brand: 'Ifad', price: 9.99, unit: '1L', image: require('../assets/egg_noodles_2.png') },
+];
+
+export const CART = [
+  { id: '1', name: 'Bell Pepper Red', price: 4.99, quantity: 1, unit: '1kg', image: require('../assets/red_pepper.jpg') },
+  { id: '2', name: 'Egg Chicken Red', price: 1.99, quantity: 1, unit: '4pcs', image: require('../assets/egg_red.png') },
+  { id: '3', name: 'Organic Bananas', price: 3.99, quantity: 1, unit: '12kg', image: require('../assets/banana.jpg') },
+  { id: '4', name: 'Ginger', price: 2.99, quantity: 1, unit: '250g', image: require('../assets/ginger.jpg') },
+];

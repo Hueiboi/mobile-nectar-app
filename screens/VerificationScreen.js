@@ -26,11 +26,11 @@ const Verification = ({ navigation }) => {
   useEffect(() => {
     if (code.length === CODE_LENGTH) {
       const timer = setTimeout(() => {
-        navigation.navigate('SelectLocation');
-      }, 2000);
+        navigation.replace('SelectLocation');
+      }, 500); 
       return () => clearTimeout(timer);
     }
-  }, [code]);
+  }, [code, navigation]);
 
 
   const renderCodeInputs = () => {
@@ -90,7 +90,7 @@ const Verification = ({ navigation }) => {
           <TouchableOpacity 
             style={[styles.fab, { opacity: code.length === CODE_LENGTH ? 1 : 0.5 }]}
             disabled={code.length !== CODE_LENGTH}
-            onPress={() => navigation.navigate('SelectLocation')}
+            onPress={() => navigation.replace('SelectLocation')}
             >
             <Ionicons name="chevron-forward" size={30} color="white" />
           </TouchableOpacity>

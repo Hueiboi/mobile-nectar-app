@@ -73,7 +73,7 @@ const SelectLocation = ({ navigation }) => {
 
         <TouchableOpacity 
           style={styles.submitBtn}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.replace('Login')}
         >
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>

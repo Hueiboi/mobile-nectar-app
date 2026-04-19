@@ -1,4 +1,4 @@
-# **TH 11/4 & 17/4 Nectar App**
+# **TH 11/4, 17/4, 19/4 Nectar App**
 - Họ và tên: Bùi Đình Hiếu
 - MSV: 23810310246
 - Lớp: D18CNPM4
@@ -40,6 +40,13 @@
 | Home | Product Detail | Explore | Beverages |
 | :---: | :---: | :---: | :---: |
 | <img src="./assets/23810310246_09_home.jpg" width="200" /> | <img src="./assets/23810310246_10_productdetail.jpg" width="200" /> | <img src="./assets/23810310246_11_explore.jpg" width="200" /> | <img src="./assets/23810310246_12_beverages.jpg" width="200" /> |
+
+---
+
+| Search | Filter | Cart | Favourite |
+| :---: | :---: | :---: | :---: |
+| <img src="./assets/23810310246_13_search.jpg" width="200" /> | <img src="./assets/23810310246_14_filter.jpg" width="200" /> | <img src="./assets/23810310246_15_cart.jpg" width="200" /> | <img src="./assets/23810310246_16_favourite.jpg" width="200" /> |
+
 
 ---
 # Video Demo

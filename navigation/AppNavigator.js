@@ -15,7 +15,10 @@ import SelectLocationScreen from '../screens/SelectLocationScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import BeverageScreen from '../screens/BeverageScreen';
+import CartScreen from '../screens/CartScreen';
+import FavouriteScreen from '../screens/FavouriteScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
+import FilterScreen from '../screens/FilterScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,14 +49,14 @@ function MainTabs() {
     />
     <Tab.Screen 
       name="Cart" 
-      component={HomeScreen} 
+      component={CartScreen} 
       options={{
         tabBarIcon: ({ color }) => <Ionicons name="cart-outline" size={24} color={color} />,
       }}
     />
     <Tab.Screen 
       name="Favourite" 
-      component={HomeScreen} 
+      component={FavouriteScreen} 
       options={{
         tabBarIcon: ({ color }) => <Ionicons name="heart-outline" size={24} color={color} />,
       }}
@@ -90,6 +93,15 @@ export default function AppNavigator() {
         <Stack.Screen name="Main" component={MainTabs} /> 
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Explore" component={ExploreScreen} />
+        <Stack.Screen 
+          name="Filter" 
+          component={FilterScreen} 
+          options={{ 
+            presentation: 'modal', 
+            animationEnabled: true,
+            headerShown: false 
+          }} 
+        />
         <Stack.Screen name="Beverages" component={BeverageScreen} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
       </Stack.Navigator>
