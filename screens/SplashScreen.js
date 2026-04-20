@@ -1,21 +1,13 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { View, Image, StyleSheet, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AuthContext } from '../context/AuthContext'; 
 
-const SplashScreen = ({ navigation }) => {
+const SplashScreen = () => { 
   const insets = useSafeAreaInsets();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace('Onboard'); 
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#58af7a" transient={true} />
+      <StatusBar barStyle="light-content" backgroundColor="#58af7a" />
       
       <View style={[
         styles.content,
@@ -27,7 +19,7 @@ const SplashScreen = ({ navigation }) => {
         <Image 
           source={require('../assets/Logo.png')}
           style={styles.logo}
-          resizeMode="cover" 
+          resizeMode="contain" 
         />
       </View>
     </View>
@@ -35,19 +27,9 @@ const SplashScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#58af7a', 
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center', 
-    alignItems: 'center',   
-    paddingHorizontal: 40,
-  },
-  logo: {
-    height: 100, 
-  },
+  container: { flex: 1, backgroundColor: '#58af7a' },
+  content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  logo: { width: '80%', height: 100 }, // Chỉnh lại cho dễ thấy
 });
 
 export default SplashScreen;

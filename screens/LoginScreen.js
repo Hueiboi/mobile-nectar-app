@@ -12,15 +12,14 @@ const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useContext(AuthContext);
 
-  const handleLogin = () => {
-    // Validation cơ bản
-    if (!email.includes('@') || password.length < 6) {
-      alert("Email hoặc mật khẩu không hợp lệ!");
-      return;
+  const handleLogin = async () => {
+    try {
+      await login({ email, password }); 
+    } catch (error) {
+      alert("Đăng nhập thất bại, thử lại nhé!");
     }
-    login({ email }); 
   };
-
+  
   return (
     <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <View style={styles.content}>
@@ -64,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.forgotText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.replace('Main')}>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
           <Text style={styles.loginBtnText}>Log In</Text>
         </TouchableOpacity>
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Đảm bảo đã install
-import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
-
+import { AuthContext } from '../context/AuthContext';
 import SplashScreen from '../screens/SplashScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import NumberScreen from '../screens/NumberScreen';
@@ -19,6 +18,8 @@ import CartScreen from '../screens/CartScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
 import FilterScreen from '../screens/FilterScreen';
+import AccountScreen from '../screens/AccountScreen';
+import OrderAcceptedScreen from '../screens/OrderAcceptedScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,7 +64,7 @@ function MainTabs() {
     />
     <Tab.Screen 
       name="Account" 
-      component={HomeScreen} 
+      component={AccountScreen} 
       options={{
         tabBarIcon: ({ color }) => <FontAwesome5 name="user" size={20} color={color} />,
       }}
@@ -73,37 +74,38 @@ function MainTabs() {
 }
 
 export default function AppNavigator() {
+  const { userToken, isLoading } = useContext(AuthContext);
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{ headerShown: false, gestureEnabled: true }}
-      >
-        {/* Luồng Auth & Splash */}
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Onboard" component={OnboardingScreen} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="NumberInput" component={NumberScreen} />
-        <Stack.Screen name="Verification" component={VerificationScreen} />
-        <Stack.Screen name="SelectLocation" component={SelectLocationScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-
-        {/* Luồng Chính (Sau khi Login) */}
-        <Stack.Screen name="Main" component={MainTabs} /> 
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Explore" component={ExploreScreen} />
-        <Stack.Screen 
-          name="Filter" 
-          component={FilterScreen} 
-          options={{ 
-            presentation: 'modal', 
-            animationEnabled: true,
-            headerShown: false 
-          }} 
-        />
-        <Stack.Screen name="Beverages" component={BeverageScreen} />
-        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+      <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: true }}>
+        {userToken == null ? (
+          <>
+            <Stack.Screen name="Onboard" component={OnboardingScreen} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="NumberInput" component={NumberScreen} />
+            <Stack.Screen name="Verification" component={VerificationScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="SelectLocation" component={SelectLocationScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Main" component={MainTabs} /> 
+            <Stack.Screen 
+              name="Filter" 
+              component={FilterScreen} 
+              options={{ presentation: 'modal', animationEnabled: true }} 
+            />
+            <Stack.Screen name="Beverages" component={BeverageScreen} />
+            <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+            <Stack.Screen name="OrderAccepted" component={OrderAcceptedScreen} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

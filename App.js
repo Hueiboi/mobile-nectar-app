@@ -13,7 +13,9 @@ export default function App() {
           name="Bùi Đình Hiếu"
           studentId="23810310246"
         />
-        <AppNavigator />
+        <CartProvider>
+          <AppNavigator />
+        </CartProvider>
       </AuthProvider>
     </SafeAreaProvider>
   );

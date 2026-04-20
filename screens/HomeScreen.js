@@ -1,84 +1,111 @@
-import React from 'react';
-import { 
-  View, Text, StyleSheet, ScrollView, Image, 
-  TextInput, TouchableOpacity,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { EXCLUSIVE_OFFERS, BEST_SELLING, GROCERIES } from '../constants/data';
+import React, { useContext } from 'react';
+import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ProductCard from '../components/ProductCard';
+import { Ionicons } from '@expo/vector-icons';
+
+// 1. Import Context và Data
+import { CartContext } from '../context/CartContext';
+import { EXCLUSIVE_OFFERS, BEST_SELLING, GROCERIES } from '../constants/data';
+import ProductCard from '../components/ProductCard'; // Đảm bảo ProductCard đã nhận prop onAdd
 
 const HomeScreen = ({ navigation }) => {
-  const insets = useSafeAreaInsets()
+  const insets = useSafeAreaInsets();
+  
+  // 2. Lấy hàm addToCart từ Context (Đáp ứng Yêu cầu 2 của thầy)
+  const { addToCart } = useContext(CartContext);
 
-  // Sub-component: Section Header
-  const SectionHeader = ({ title }) => (
+  const SectionHeader = ({ title, onPress }) => (
     <View style={styles.sectionHeader}>
       <Text style={styles.sectionTitle}>{title}</Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.seeAllText}>See all</Text>
       </TouchableOpacity>
     </View>
   );
 
+  // Hàm xử lý khi bấm vào sản phẩm
+  const handleProductPress = (product) => {
+    navigation.navigate('ProductDetail', { item: product });
+  };
+
   return (
-    <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 30 }}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         
-        {/* 1. Header Location */}
+        {/* Header Location */}
         <View style={styles.header}>
           <Image source={require('../assets/Carrot_Orange.png')} style={styles.logo} />
           <View style={styles.locationRow}>
             <Ionicons name="location-sharp" size={18} color="#4C4C4C" />
-            <Text style={styles.locationText}>Dhaka, Banassre</Text>
+            <Text style={styles.locationText}>Dhaka, Banasree</Text>
           </View>
         </View>
 
-        {/* 2. Search Bar */}
-        <View style={styles.searchBox}>
+        {/* Search Bar: sang Tab Explore để tìm kiếm */}
+        <TouchableOpacity 
+          activeOpacity={1}
+          style={styles.searchBox} 
+          onPress={() => navigation.navigate('Explore')}
+        >
           <Ionicons name="search" size={20} color="#181725" />
-          <TextInput 
-            placeholder="Search Store" 
-            style={styles.searchInput}
-            placeholderTextColor="#7C7C7C"
-          />
-        </View>
+          <Text style={{ marginLeft: 10, color: '#7C7C7C' }}>Search Store</Text>
+        </TouchableOpacity>
 
-        {/* 3. Promo Banner */}
+        {/* Promo Banner */}
         <View style={styles.bannerContainer}>
-          <Image 
-            source={require('../assets/fresh_vegetables.jpg')} 
-            style={styles.bannerImage}
-            resizeMode="cover"
-          />
+          <Image source={require('../assets/fresh_vegetables.jpg')} style={styles.bannerImage} resizeMode="cover" />
         </View>
 
-        {/* 4. Exclusive Offer Section */}
-        <SectionHeader title="Exclusive Offer" />
+        {/* Exclusive Offer */}
+        <SectionHeader title="Exclusive Offer" onPress={() => {}} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalList}>
-          {EXCLUSIVE_OFFERS.map(item => <ProductCard key={item.id} item={item} />)}
+          {EXCLUSIVE_OFFERS.map(item => (
+            <ProductCard 
+              key={item.id} 
+              item={item} 
+              onPress={() => handleProductPress(item)}
+              onAdd={() => addToCart(item)} // Gửi hành động thêm vào giỏ (Ảnh 4)
+            />
+          ))}
         </ScrollView>
 
-        {/* 5. Best Selling Section */}
-        <SectionHeader title="Best Selling" />
+        {/* Best Selling */}
+        <SectionHeader title="Best Selling" onPress={() => {}} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalList}>
-          {BEST_SELLING.map(item => <ProductCard key={item.id} item={item} />)}
+          {BEST_SELLING.map(item => (
+            <ProductCard 
+              key={item.id} 
+              item={item} 
+              onPress={() => handleProductPress(item)}
+              onAdd={() => addToCart(item)}
+            />
+          ))}
         </ScrollView>
 
-        {/* 6. Groceries Section (Mô phỏng list ngang nhỏ hơn) */}
-        <SectionHeader title="Groceries" />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={[styles.horizontalList, {paddingBottom: 20}]}>
-            <View style={[styles.groceryCategory, { backgroundColor: '#F8A44C20' }]}>
-                <Image source={require('../assets/pulses.jpg')} style={styles.groceryImg} />
-                <Text style={styles.groceryText}>Pulses</Text>
-            </View>
-            <View style={[styles.groceryCategory, { backgroundColor: '#53B17520' }]}>
-                <Image source={require('../assets/rice.jpg')} style={styles.groceryImg} />
-                <Text style={styles.groceryText}>Rice</Text>
-            </View>
+        {/* Groceries Section */}
+        <SectionHeader title="Groceries" onPress={() => {}} />
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={[styles.groceryList, {marginBottom: 20, marginLeft: 20}]}>
+           {/* Mock Categories nhỏ */}
+           <TouchableOpacity style={[styles.groceryCategory, { backgroundColor: '#F8A44C20' }]}>
+              <Image source={require('../assets/pulses.jpg')} style={styles.groceryImg} />
+              <Text style={styles.groceryText}>Pulses</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={[styles.groceryCategory, { backgroundColor: '#53B17520' }]}>
+              <Image source={require('../assets/rice.jpg')} style={styles.groceryImg} />
+              <Text style={styles.groceryText}>Rice</Text>
+           </TouchableOpacity>
         </ScrollView>
+
+        {/* List Groceries Products */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalList}>
-            {GROCERIES.map(item => <ProductCard key={item.id} item={item} />)}
+          {GROCERIES.map(item => (
+            <ProductCard 
+              key={item.id} 
+              item={item} 
+              onPress={() => handleProductPress(item)}
+              onAdd={() => addToCart(item)}
+            />
+          ))}
         </ScrollView>
 
       </ScrollView>

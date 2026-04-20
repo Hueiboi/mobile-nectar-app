@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { 
-  View, Text, Image, StyleSheet, TouchableOpacity, 
-  ScrollView
-} from 'react-native';
-import { Ionicons, Feather, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import React, { useState, useContext } from 'react'; 
+import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { CartContext } from '../context/CartContext'; 
+import { Ionicons, Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ProductDetailScreen = ({ route, navigation }) => {
-  const insets = useSafeAreaInsets()
-
-  const { item } = route.params || {}; // Lấy dữ liệu từ navigation
+const insets = useSafeAreaInsets();
+  const { item } = route.params || {};
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToBasket = () => {
+    if (item) {
+      addToCart(item, quantity); 
+      navigation.goBack();  
+    }
+  };
 
   return (
     <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
@@ -36,8 +42,8 @@ const ProductDetailScreen = ({ route, navigation }) => {
         <View style={styles.contentSection}>
           <View style={styles.titleRow}>
             <View>
-              <Text style={styles.productName}>{item?.name || 'Naturel Red Apple'}</Text>
-              <Text style={styles.unitText}>{item?.unit || '1kg'}, Price</Text>
+              <Text style={styles.productName}>{item?.name || 'Product Name'}</Text>
+              <Text style={styles.unitText}>{item?.unit || 'Unit'}, Price</Text>
             </View>
             <TouchableOpacity>
               <Ionicons name="heart-outline" size={24} color="#7C7C7C" />
@@ -57,7 +63,9 @@ const ProductDetailScreen = ({ route, navigation }) => {
                 <Text style={[styles.counterSymbol, {color: '#53B175'}]}>+</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.priceText}>${(4.99 * quantity).toFixed(2)}</Text>
+            <Text style={styles.priceText}>
+              ${((item?.price || 0) * quantity).toFixed(2)}
+            </Text>
           </View>
 
           <View style={styles.divider} />
@@ -90,7 +98,10 @@ const ProductDetailScreen = ({ route, navigation }) => {
 
       {/* Fixed Bottom Button */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.basketBtn}>
+        <TouchableOpacity 
+          style={styles.basketBtn} 
+          onPress={handleAddToBasket}
+        >
           <Text style={styles.basketBtnText}>Add To Basket</Text>
         </TouchableOpacity>
       </View>
