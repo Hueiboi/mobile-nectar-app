@@ -65,6 +65,7 @@ https://github.com/user-attachments/assets/bfbb867c-6a0e-4e8a-ae75-49a41fab7beb
 
 ### Video 2
 [./assets/video2.mp4](./assets/video2.mp4)
+[./assets/video2-1.mp4](./assets/video2-1.mp4) (Video 2-1 là video bổ sung thao tác xoá item trong giỏ hàng)
 
 </details>
 

@@ -7,9 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { CartContext } from '../context/CartContext';
 import { EXCLUSIVE_OFFERS, BEST_SELLING, GROCERIES } from '../constants/data';
 import ProductCard from '../components/ProductCard'; // Đảm bảo ProductCard đã nhận prop onAdd
+import { AuthContext } from '../context/AuthContext';
+
 
 const HomeScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const { isLoading } = useContext(AuthContext)
   
   // 2. Lấy hàm addToCart từ Context (Đáp ứng Yêu cầu 2 của thầy)
   const { addToCart } = useContext(CartContext);
@@ -28,7 +31,17 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('ProductDetail', { item: product });
   };
 
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <ActivityIndicator size="large" color="#53B175" />
+        <Text style={{textAlign: 'center', marginTop: 10}}>Đang tải dữ liệu...</Text>
+      </View>
+    );
+  }
+
   return (
+    
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         
