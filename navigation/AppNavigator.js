@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Đảm bảo đã install
 import { AuthContext } from '../context/AuthContext';
 import SplashScreen from '../screens/SplashScreen';
@@ -20,6 +21,7 @@ import ProductDetailScreen from '../screens/ProductDetailScreen';
 import FilterScreen from '../screens/FilterScreen';
 import AccountScreen from '../screens/AccountScreen';
 import OrderAcceptedScreen from '../screens/OrderAcceptedScreen';
+import OrderHistoryScreen from '../screens/OrderHistoryScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -85,11 +87,11 @@ export default function AppNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: true }}>
         {userToken == null ? (
           <>
+            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Onboard" component={OnboardingScreen} />
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="NumberInput" component={NumberScreen} />
             <Stack.Screen name="Verification" component={VerificationScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="SelectLocation" component={SelectLocationScreen} />
           </>
@@ -104,6 +106,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Beverages" component={BeverageScreen} />
             <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
             <Stack.Screen name="OrderAccepted" component={OrderAcceptedScreen} />
+            <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} />
           </>
         )}
       </Stack.Navigator>

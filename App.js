@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import AppNavigator from './navigation/AppNavigator'; 
 import InfoModal from './components/Info';
 
