@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { storageService, KEYS } from '../services/storageService';
+import { storageService, KEYS } from '../service/StorageService';
 
 export const CartContext = createContext();
 

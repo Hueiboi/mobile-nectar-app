@@ -8,11 +8,15 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
 
   const login = async (userData) => {
-    // Giả lập logic validation/login
     const token = 'mock-jwt-token'; 
-    setUserToken(token);
-    await AsyncStorage.setItem('userToken', token);
-    await AsyncStorage.setItem('userData', JSON.stringify(userData));
+  
+    setUserToken(token);  
+    try {
+      await AsyncStorage.setItem('userToken', token);
+      await AsyncStorage.setItem('userData', JSON.stringify(userData));
+    } catch (e) {
+      console.log("Error: ", e);
+    }
   };
 
   const logout = async () => {
@@ -28,6 +32,8 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(false);
     } catch (e) {
       console.log(`Check login error: ${e}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
